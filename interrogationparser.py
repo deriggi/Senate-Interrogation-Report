@@ -24,19 +24,28 @@ def processALine(line, allwords):
 	# if line is 5 words or more, use it
 	parts = re.split('\s', line);
 
+	# lowercase all words
+	# strip each of []{}"
+	# ignore if is < 3
+
 	for part in parts:
 		part = part.lower()
 		part = part.strip()
 		part = re.sub('[\(\)\,\[\]\}\{\"\'\^]', '', part)
 		part = removeCharAtEnd(part, '.')
-		print part
-	# lowercase all words
-	# strip each of []{}"
-	# ignore if is < 3
+		tabulatePart(part, allwords)
+		
+		print "{0} : {1}".format(part, allwords[part])
 
+	# tabulate
+	# print partlen(parts)
 
-	print len(parts)
-
+def tabulatePart(part, allwords):
+	# if len(part) > 3:
+	if part not in allwords:
+		allwords[part] = 1
+	else:
+		allwords[part] = allwords[part] + 1
 
 
 numlines = len(readFile('C:/Users/jderiggi/Documents/InterrogationReport/cia.txt'))
